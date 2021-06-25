@@ -1,5 +1,9 @@
 import { routes } from "./app/routes";
 import MainRoutes from "./common/components/routes/MainRoutes";
+import firebase from './app/firebase';
+
+// Initialize Firebase App.
+firebase();
 
 function App() {
 
