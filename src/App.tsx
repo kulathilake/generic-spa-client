@@ -3,7 +3,7 @@ import MainRoutes from "./common/components/routes/MainRoutes";
 import firebase from './app/firebase';
 
 // Initialize Firebase App.
-firebase();
+const app = firebase();
 
 function App() {
 
@@ -14,4 +14,5 @@ function App() {
   );
 }
 
+export {app as firebase};
 export default App;
