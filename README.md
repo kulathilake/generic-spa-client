@@ -1,3 +1,7 @@
+# Outreach MVP
+Minimum viable product for the outreach digital marketing platform.
+Based on [Generic SPA Client](https://github.com/kulathilake/generic-spa-client) and build with
+Firebase as the backend provider.
 # Generic SPA Client
 Boiler plate code for a general purpose single page web application client.
 
