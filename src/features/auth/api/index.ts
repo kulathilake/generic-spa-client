@@ -20,18 +20,25 @@ export default class AuthApi implements IAuthApi{
     federatedSignup(provider: any): Promise<User> {
         throw new Error("Method not implemented.");
     }
+    /**
+     * Logs in a user with email and passowrd
+     * @param email string
+     * @param password string
+     * @returns User
+     */
     async login(email: string, password: string): Promise<User> {
         try{
             const authRes = await firebase.auth().signInWithEmailAndPassword(email,password);
             return {
                     username: authRes.user?.uid!,
-                    permissions: [],
+                    permissions: [], 
             };
         }catch(e){
             console.error(e);
             throw new Error("Login Error");
         }
     }
+    
     federatedLogin(provider: any): Promise<User> {
         throw new Error("Method not implemented.");
     }
