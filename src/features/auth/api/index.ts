@@ -1,5 +1,6 @@
 import { User } from "../../../common/types/user";
 import { IAuthApi } from "../../../common/types/auth";
+import {firebase} from '../../../App';
 
 export default class AuthApi implements IAuthApi{
     private static instance: AuthApi | null;
@@ -19,8 +20,17 @@ export default class AuthApi implements IAuthApi{
     federatedSignup(provider: any): Promise<User> {
         throw new Error("Method not implemented.");
     }
-    login(email: string, password: string): Promise<User> {
-        throw new Error("Method not implemented.");
+    async login(email: string, password: string): Promise<User> {
+        try{
+            const authRes = await firebase.auth().signInWithEmailAndPassword(email,password);
+            return {
+                    username: authRes.user?.uid!,
+                    permissions: [],
+            };
+        }catch(e){
+            console.error(e);
+            throw e;
+        }
     }
     federatedLogin(provider: any): Promise<User> {
         throw new Error("Method not implemented.");
