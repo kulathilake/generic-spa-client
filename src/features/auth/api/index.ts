@@ -29,7 +29,7 @@ export default class AuthApi implements IAuthApi{
             };
         }catch(e){
             console.error(e);
-            throw e;
+            throw new Error("Login Error");
         }
     }
     federatedLogin(provider: any): Promise<User> {
