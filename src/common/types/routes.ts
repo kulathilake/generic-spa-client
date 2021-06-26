@@ -6,6 +6,7 @@ export type Route = {
     exact: boolean;
     component: React.ComponentType<any>;
     isProtected: boolean;
+    isGuestOnly?: boolean;
     permissions?: Permissions[]
 }
 
