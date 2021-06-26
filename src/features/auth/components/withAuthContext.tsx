@@ -8,8 +8,7 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
     return function AuthComponent(props){
         const api = AuthApi.getApi();
         const handleLogin = (email:string, password:string) => {
-            api.login(email,password)
-            .catch(console.error); // Change behaviour
+            // Dispatch Login Action
         };
         return <Component 
         {...(props as T)} 

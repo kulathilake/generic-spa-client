@@ -22,6 +22,10 @@ function AuthProvider(props: any) {
         }
     },[user,isAuthenticated]);
 
+    /**
+     * Firebase Auth Listener
+     */
+
     return (
         <Provider value={{isAuthenticated,setIsAuthenticated, user, setUser}}>
             {props.children}

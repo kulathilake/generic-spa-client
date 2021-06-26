@@ -1,13 +1,13 @@
+import React, { FormEventHandler } from "react";
 import { LoginViewProps } from "./types/types";
 import withAuthContext from "./components/withAuthContext";
 import ColumnedPage, {Column, Row} from "../../common/layouts/pages/ColumnedPage";
-import React, { FormEventHandler } from "react";
-
+import AsyncActionButton from "../../common/components/buttons/AsyncActionButton";
 /**
  * UI For Login Screen
  */
 export function LoginView(props: LoginViewProps) {
-
+    
     const handleLoginSubmit: FormEventHandler = (e: React.FormEvent<HTMLFontElement>) =>{
         e.preventDefault();
         const target = e.target as typeof e.target & {
@@ -28,7 +28,7 @@ export function LoginView(props: LoginViewProps) {
                     <form onSubmit={handleLoginSubmit}>
                         <input id="email" name="email"/>
                         <input id="password" name="password" type="password"/>
-                        <button type="submit">Login</button>
+                        <AsyncActionButton type="submit">Login</AsyncActionButton>
                     </form>
                 </Row>
                 <Row>
