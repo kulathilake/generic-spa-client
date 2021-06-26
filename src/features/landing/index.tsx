@@ -17,7 +17,7 @@ export default function LandingPage(){
                 </Row>
                 <Row>
                     {/* Body of the Landing Page */}
-                    Body.
+                    
                 </Row>
                 <Row>
                     {/* Here Goes the Footer */}
