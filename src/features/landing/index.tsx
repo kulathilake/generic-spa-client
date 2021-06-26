@@ -1,4 +1,5 @@
 import ColumnedPage, {Column, Row} from "../../common/layouts/pages/ColumnedPage";
+import LandingPageMenu from "./components/LandingPageMenu";
 
 export default function LandingPage(){
     return (
@@ -6,10 +7,10 @@ export default function LandingPage(){
             <Column>
                 <Row>
                     {/* Here Goes the Main Menu */}
-                    Landing Page Menu.
+                    <LandingPageMenu/>
                 </Row>
                 <Row>
-                    {/* Here Goes the Carousel */}
+                    {/* Here Goes the Hero */}
                     Carousel.
                 </Row>
                 <Row>
