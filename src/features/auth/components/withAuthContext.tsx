@@ -1,8 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { AuthWrapperProps } from "../types/types";
 import AuthApi from '../api';
 import { Roles } from "../../../common/types/auth";
-import { useAlert } from "../../../app/hooks";
+import { useAlert, useAuth } from "../../../app/hooks";
+import { useHistory } from "react-router-dom";
+import { useEffect } from "react";
+import { AuthenticatedUser } from "../../../common/types/user";
+import { useDispatch } from "react-redux";
+import { setCurrentSession } from "../authSlice";
 
 export default function withAuthContext <T extends AuthWrapperProps>(Component: React.ComponentType<T>)
 : React.FC<Omit<T, keyof AuthWrapperProps>>{
@@ -10,9 +16,23 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
     return function AuthComponent(props){
         const api = AuthApi.getApi();
         const {setAlert} = useAlert();
+        const {isAuthenticated,setIsAuthenticated,setUser} = useAuth();
+        const dispatch = useDispatch();
+        const history = useHistory();
         const handleLogin = async (email:string, password:string) => {
             try{
-                return await api.login(email,password)
+                let user = await api.login(email,password);
+                if(user){
+                    setIsAuthenticated(true);
+                    setUser(user as AuthenticatedUser);
+                    dispatch(setCurrentSession(user));
+                    setAlert({
+                        message: "You are Logged In",
+                        severity: 'success',
+                        show: true,
+                    });
+                    history.push('/')
+                };
             }catch(error){
                 setAlert({
                     message: error.message,
@@ -23,7 +43,18 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
         };
         const handleSignup = async (name: string, email: string, password: string, role: Roles) => {
             try{
-                return await api.signup(email, password);
+                let user = await api.signup(email, password);
+                if(user){
+                    setIsAuthenticated(true);
+                    setUser(user as AuthenticatedUser);
+                    dispatch(setCurrentSession(user));
+                    setAlert({
+                        message: "Your Account has been created. ",
+                        severity: 'success',
+                        show: true,
+                    });
+                    history.push('/');
+                };
             }catch(error){
                 setAlert({
                     message: error.message,
@@ -32,6 +63,12 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
                 });
             }
         }
+        useEffect(()=>{
+            if(isAuthenticated){
+                history.goBack();
+            }
+        },[isAuthenticated]);
+
         return <Component 
         {...(props as T)} 
         onLogin={handleLogin}

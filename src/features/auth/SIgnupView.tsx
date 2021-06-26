@@ -38,19 +38,20 @@ export function SignupView(props: SignupViewProps){
                 </Row>}
                 <Row>
                     <form onSubmit={handleRegisterSubmit}>
+                        Register on Outreach
                         <label htmlFor="name">Your Name</label>
-                        <input id="name" name="name"/>
+                        <input id="name" name="name" required/>
                         <label htmlFor="email">Your Email</label>
-                        <input id="email" name="email" type="email"/>
+                        <input id="email" name="email" type="email" required/>
                         <label htmlFor="password">Password</label>
-                        <input id="password" name="password" type="password"/>
+                        <input id="password" name="password" type="password" required/>
                         <label htmlFor="confirmPassword">Confirm Password</label>
-                        <input id="confirmPassword" name="confirmPassword" type="password"/>
-                        <input id="role-creator" name="role" value={Roles.CREATOR}type="radio"/>
+                        <input id="confirmPassword" name="confirmPassword" type="password" required/>
+                        <input id="role-creator" name="role" value={Roles.CREATOR}type="radio" required/>
                         <label htmlFor="role-cretor">I Create Content</label>
-                        <input id="role-creator" name="role" value={Roles.SELLER} type="radio"/>                        
+                        <input id="role-creator" name="role" value={Roles.SELLER} type="radio" required/>                        
                         <label htmlFor="role-cretor">I Sell Products</label>
-                        <input id="role-both" name="role" value={Roles.BOTH} type="radio"/>
+                        <input id="role-both" name="role" value={Roles.BOTH} type="radio" required/>
                         <label htmlFor="role-both">I Do Both</label>
                         <AsyncActionButton type="submit" isRunning={isSignupPending}>Register</AsyncActionButton>
                     </form>

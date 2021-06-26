@@ -22,7 +22,7 @@ export interface AuthWrapperProps{
 
   export type AuthState = {
       session?: {
-          loggedInAt: Date;
-          user: User;
+          loggedInAt: Date | null;
+          user: User | null;
         },
   }
