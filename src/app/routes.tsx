@@ -1,4 +1,5 @@
 import { Route } from "../common/types/routes";
+import LoginView from "../features/auth/LoginView";
 import LandingPage from "../features/landing";
 
 /**
@@ -10,5 +11,11 @@ export const routes: Route[] = [
         exact: true,
         isProtected: false,
         path: '/',
+    },
+    {
+        component: LoginView,
+        exact: true,
+        isProtected: false,
+        path:'/login'
     }
 ];
