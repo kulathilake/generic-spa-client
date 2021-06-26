@@ -1,7 +1,7 @@
 import React from "react";
 import { ColumnedPageProps, ColumnProps, RowProps } from "../../types/layout.props";
 
-export function Column(props: React.PropsWithChildren<ColumnProps>){
+export function Column<T extends ColumnProps>(props: React.PropsWithChildren<T>){
     return (
         <div>
             {props.children}
@@ -9,17 +9,17 @@ export function Column(props: React.PropsWithChildren<ColumnProps>){
     );
 };
 
-export function Row(props: React.PropsWithChildren<RowProps>){
+export function Row<T extends RowProps>(props: React.PropsWithChildren<T>){
     return (
-        <div>
+        <div {...props}>
             {props.children}
         </div>
     )
 }
 
-export default function ColumnedPage(props: React.PropsWithChildren<ColumnedPageProps>){
-    
-    return <div>
+export default function ColumnedPage<T extends ColumnedPageProps>(props: React.PropsWithChildren<T>){
+
+    return <div {...props}>
         {props.children}
     </div>
 
