@@ -4,6 +4,7 @@ import MainRoutes from "./common/components/routes/MainRoutes";
 import firebase from './app/firebase';
 import { useEffect } from "react";
 import { useAuth } from "./app/hooks";
+import { Roles } from "./common/types/auth";
 
 // Initialize Firebase App.
 const app = firebase();
@@ -16,7 +17,8 @@ function App() {
       if(user){
         setIsAuthenticated(true);
         setUser({
-          username: user.uid,
+          username: user.email!,
+          role: Roles.BOTH,
           permissions:[],
           tokens: {
             accessToken: {

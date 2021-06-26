@@ -43,13 +43,13 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
         };
         const handleSignup = async (name: string, email: string, password: string, role: Roles) => {
             try{
-                let user = await api.signup(email, password);
+                let user = await api.signup(email, password, name, role);
                 if(user){
                     setIsAuthenticated(true);
                     setUser(user as AuthenticatedUser);
                     dispatch(setCurrentSession(user));
                     setAlert({
-                        message: "Your Account has been created. ",
+                        message: "Your Account has been created.",
                         severity: 'success',
                         show: true,
                     });

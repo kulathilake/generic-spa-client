@@ -7,7 +7,7 @@ export interface IAuthApi {
      * @param email string
      * @param password string
      */
-      signup(email:string, password: string): Promise<User>,
+      signup(email:string, password: string, name: string, role: Roles): Promise<AuthenticatedUser>,
       /**
        * Performes Federated User Sign Up
        * @param provider AuthProvider
@@ -18,7 +18,7 @@ export interface IAuthApi {
        * @param email string
        * @param password string
        */
-      login(email: string, password: string): Promise<User>,
+      login(email: string, password: string): Promise<AuthenticatedUser>,
       federatedLogin(provider: AuthProvider): Promise<User>
       logout():void,
       reset(email: string): Promise<any>,
@@ -26,9 +26,7 @@ export interface IAuthApi {
       confirmEmail(code:string,email:string): Promise<any>,
       refresh(token: string): Promise<any>,
       changePassword(oldPassword: string, newPassword: string): Promise<any>
-      getUser(): User,
-    //   getUserProfile(): UserProfile;
-      getSession(): any;
+      getUserData(): User,
 };
 
 export type AuthContextType = {
@@ -48,3 +46,4 @@ export enum Roles {
   BOTH,
   ADMIN
 }
+

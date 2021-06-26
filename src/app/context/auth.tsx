@@ -1,5 +1,5 @@
 // import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext,  useState } from "react";
 import { AuthenticatedUser } from "../../common/types/user";
 import { AuthContextType } from "../../common/types/auth";
 
