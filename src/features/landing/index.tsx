@@ -1,5 +1,7 @@
 import ColumnedPage, {Column, Row} from "../../common/layouts/pages/ColumnedPage";
 import LandingPageMenu from "./components/LandingPageMenu";
+import LandingPageHero from "./components/LandingPageHero";
+import LandingPageFooter from "./components/LandingPageFooter";
 
 export default function LandingPage(){
     return (
@@ -11,7 +13,7 @@ export default function LandingPage(){
                 </Row>
                 <Row>
                     {/* Here Goes the Hero */}
-                    Carousel.
+                    <LandingPageHero />
                 </Row>
                 <Row>
                     {/* Body of the Landing Page */}
@@ -19,7 +21,7 @@ export default function LandingPage(){
                 </Row>
                 <Row>
                     {/* Here Goes the Footer */}
-                    Landing Page Footer.
+                    <LandingPageFooter />
                 </Row>
             </Column>
         </ColumnedPage>
