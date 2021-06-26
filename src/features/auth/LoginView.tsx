@@ -2,11 +2,14 @@ import React, { FormEventHandler } from "react";
 import { LoginViewProps } from "./types/types";
 import withAuthContext from "./components/withAuthContext";
 import ColumnedPage, {Column, Row} from "../../common/layouts/pages/ColumnedPage";
-import LoginViewMenu from "./components/LoginViewMenu";
+import LoginViewMenu from "./components/AuthViewMenu";
+import AsyncActionButton from "../../common/components/buttons/AsyncActionButton";
+import { useState } from "react";
 /**
  * UI For Login Screen
  */
 export function LoginView(props: LoginViewProps) {
+    const [isLoginPending,setIsLoginPending] = useState(false);
 
     const handleLoginSubmit: FormEventHandler = (e: React.FormEvent<HTMLFontElement>) =>{
         e.preventDefault();
@@ -14,7 +17,15 @@ export function LoginView(props: LoginViewProps) {
             email: {value: string},
             password: {value: string};
         }
-        props.onLogin(target.email.value, target.password.value);
+        setIsLoginPending(true);
+        props.onLogin(target.email.value, target.password.value)
+        .then(()=>{
+            // ...
+        })
+        .catch()
+        .finally(()=>{
+            setIsLoginPending(false);
+        })
     };
 
 
@@ -30,7 +41,7 @@ export function LoginView(props: LoginViewProps) {
                         Login to Outreach
                         <input id="email" name="email"/>
                         <input id="password" name="password" type="password"/>
-                        <button type="submit">Login</button>
+                        <AsyncActionButton isRunning={isLoginPending} type="submit">Login</AsyncActionButton>
                     </form>
                 </Row>
                 <Row>
