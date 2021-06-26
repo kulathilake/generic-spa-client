@@ -34,8 +34,7 @@ export default class AuthApi implements IAuthApi{
                     permissions: [], 
             };
         }catch(e){
-            console.error(e);
-            throw new Error("Login Error");
+            throw e;
         }
     }
     
