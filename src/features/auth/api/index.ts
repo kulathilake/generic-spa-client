@@ -1,5 +1,5 @@
-import { User } from "../../../common/types/user";
-import { IAuthApi } from "../../../common/types/auth";
+import { AuthenticatedUser, User } from "../../../common/types/user";
+import { IAuthApi, Roles } from "../../../common/types/auth";
 import {firebase} from '../../../App';
 
 export default class AuthApi implements IAuthApi{
@@ -19,12 +19,22 @@ export default class AuthApi implements IAuthApi{
      * @param email 
      * @param password 
      */
-    async signup(email: string, password: string): Promise<User> {
+    async signup(email: string, password: string, name: string, role: Roles): Promise<AuthenticatedUser> {
         try {
-            const authRes = await firebase.auth().createUserWithEmailAndPassword(email,password)
+            const authRes = await firebase.auth().createUserWithEmailAndPassword(email,password);
+            // Save User Data
             return {
                 username: authRes.user?.email!,
-                permissions: []
+                role: role,
+                permissions: [],
+                tokens: {
+                    accessToken: {
+                        data: await authRes.user?.getIdToken()!
+                    },
+                    refreshToken: {
+                        data: authRes.user?.refreshToken!
+                    }
+                }
             }
         } catch (e) {
             throw e;
@@ -39,12 +49,20 @@ export default class AuthApi implements IAuthApi{
      * @param password string
      * @returns User
      */
-    async login(email: string, password: string): Promise<User> {
+    async login(email: string, password: string): Promise<AuthenticatedUser> {
         try{
             const authRes = await firebase.auth().signInWithEmailAndPassword(email,password);
+            const user = await (this.getUserData());
             return {
-                    username: authRes.user?.uid!,
-                    permissions: [], 
+                ...user,
+                tokens: {
+                    accessToken: {
+                        data: await authRes.user?.getIdToken()!
+                    },
+                    refreshToken: {
+                        data: authRes.user?.refreshToken!
+                    }
+                }
             };
         }catch(e){
             throw e;
@@ -72,11 +90,9 @@ export default class AuthApi implements IAuthApi{
     changePassword(oldPassword: string, newPassword: string): Promise<any> {
         throw new Error("Method not implemented.");
     }
-    getUser(): User {
+    getUserData(): User {
         throw new Error("Method not implemented.");
     }
-    getSession() {
-        throw new Error("Method not implemented.");
-    }
+    
     
 }

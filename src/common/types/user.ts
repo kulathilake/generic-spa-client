@@ -1,8 +1,9 @@
 import { Address } from "./misc";
-import { Permissions } from "./auth";
+import { Permissions, Roles } from "./auth";
 
 export interface User {
     username: string,
+    role: Roles,
     permissions: Permissions [],
     profile?: {
         firstName?: string;
