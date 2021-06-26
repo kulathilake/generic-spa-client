@@ -19,8 +19,8 @@ export function Row<T extends RowProps>(props: React.PropsWithChildren<T>){
 
 export default function ColumnedPage<T extends ColumnedPageProps>(props: React.PropsWithChildren<T>){
 
-    return <div {...props}>
+    return (<div {...props}>
         {props.children}
-    </div>
+    </div>)
 
 }
