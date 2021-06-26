@@ -2,12 +2,12 @@ import React, { FormEventHandler } from "react";
 import { LoginViewProps } from "./types/types";
 import withAuthContext from "./components/withAuthContext";
 import ColumnedPage, {Column, Row} from "../../common/layouts/pages/ColumnedPage";
-import AsyncActionButton from "../../common/components/buttons/AsyncActionButton";
+import LoginViewMenu from "./components/LoginViewMenu";
 /**
  * UI For Login Screen
  */
 export function LoginView(props: LoginViewProps) {
-    
+
     const handleLoginSubmit: FormEventHandler = (e: React.FormEvent<HTMLFontElement>) =>{
         e.preventDefault();
         const target = e.target as typeof e.target & {
@@ -21,14 +21,16 @@ export function LoginView(props: LoginViewProps) {
     return (
         <ColumnedPage center={true}>
             <Column>
-                <Row>
-                    Login
-                </Row>
+                {(props.variant==="page" || props.variant===undefined)&&<Row>
+                    {/* Login Screen Menu */}
+                    <LoginViewMenu />
+                </Row>}
                 <Row>
                     <form onSubmit={handleLoginSubmit}>
+                        Login to Outreach
                         <input id="email" name="email"/>
                         <input id="password" name="password" type="password"/>
-                        <AsyncActionButton type="submit">Login</AsyncActionButton>
+                        <button type="submit">Login</button>
                     </form>
                 </Row>
                 <Row>
