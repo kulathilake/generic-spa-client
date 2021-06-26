@@ -1,5 +1,6 @@
 import { Route } from "../common/types/routes";
 import LoginView from "../features/auth/LoginView";
+import SignupView from "../features/auth/SIgnupView";
 import LandingPage from "../features/landing";
 
 /**
@@ -17,5 +18,11 @@ export const routes: Route[] = [
         exact: true,
         isProtected: false,
         path:'/login'
+    },
+    {
+        component: SignupView,
+        exact: true,
+        isProtected: false,
+        path: '/register'
     }
 ];

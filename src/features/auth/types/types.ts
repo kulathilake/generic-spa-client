@@ -1,8 +1,10 @@
+import { Roles } from "../../../common/types/auth";
 import { User } from "../../../common/types/user";
 
 export interface AuthWrapperProps{
     setAlert: () => void;
-    onLogin: (email: string, password: string) => void;
+    onLogin: (email: string, password: string) => Promise<void>;
+    onSignup: (name: string, email: string, password: string, role: Roles) => Promise<void>;
   }
   
   export interface LoginViewProps extends AuthWrapperProps{

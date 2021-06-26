@@ -42,3 +42,9 @@ export enum Permissions {
   
 }
 
+export enum Roles {
+  CREATOR,
+  SELLER,
+  BOTH,
+  ADMIN
+}
