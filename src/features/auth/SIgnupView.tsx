@@ -19,7 +19,7 @@ export function SignupView(props: SignupViewProps){
             confirmPassword: {value: string};
             role: {value: Roles}
         }
-        props.onSignup(target.name.value, target.email.value, target.password.value, target.role.value)
+        props.onSignup(target.name.value, '',target.email.value, target.password.value, target.role.value)
         .then(()=>{
             
         })

@@ -4,7 +4,7 @@ import { User } from "../../../common/types/user";
 export interface AuthWrapperProps{
     setAlert: () => void;
     onLogin: (email: string, password: string) => Promise<void>;
-    onSignup: (name: string, email: string, password: string, role: Roles) => Promise<void>;
+    onSignup: (firstName: string, lastName: string, email: string, password: string, role: Roles) => Promise<void>;
     onLogout(): () => Promise<void>
   }
   
