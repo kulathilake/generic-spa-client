@@ -1,5 +1,5 @@
-import { ReactNode, useEffect } from "react";
-import { Route,Redirect, RouteProps} from "react-router-dom";
+import { ReactNode, } from "react";
+import { Route,Redirect, RouteProps,} from "react-router-dom";
 import { useAuth } from "../../../app/hooks"
 import {Route as RouteType} from '../../types/routes';
 
@@ -26,15 +26,15 @@ export default function withRouteProtection(redirect: string | ReactNode): React
             };
         };
 
-        useEffect(()=>{
-            console.log("in")
-        },[isAuthenticated])
-
-        return (
-        <Route {...(props as RouteProps)}>
-            {isAuthorized()?props.children:renderFallback()}
-        </Route>
-            
-        )
+        if(isAuthenticated!==undefined){
+            return (
+            <Route {...(props as RouteProps)}>
+                {isAuthorized()?props.children:renderFallback()}
+            </Route>
+                
+            )
+        } else {
+            return null;
+        }
     }
 }

@@ -5,7 +5,6 @@ import AuthApi from '../api';
 import { Roles } from "../../../common/types/auth";
 import { useAlert, useAuth } from "../../../app/hooks";
 import { useHistory } from "react-router-dom";
-import { useEffect } from "react";
 import { AuthenticatedUser } from "../../../common/types/user";
 import { useDispatch } from "react-redux";
 import { setCurrentSession } from "../authSlice";
@@ -16,7 +15,7 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
     return function AuthComponent(props){
         const api = AuthApi.getApi();
         const {setAlert} = useAlert();
-        const {isAuthenticated,setIsAuthenticated,setUser} = useAuth();
+        const {setIsAuthenticated,setUser} = useAuth();
         const dispatch = useDispatch();
         const history = useHistory();
         const handleLogin = async (email:string, password:string) => {
@@ -31,7 +30,7 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
                         severity: 'success',
                         show: true,
                     });
-                    history.push('/')
+                    history.push('/');
                 };
             }catch(error){
                 setAlert({
@@ -66,6 +65,9 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
         const handleLogout = async () => {
             try {
                 await api.logout();
+                dispatch(setCurrentSession(null));
+                setIsAuthenticated(false);
+                setUser(null);
                 setAlert({
                     message: "You are logged out.",
                     severity: 'success',
@@ -77,13 +79,9 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
                     severity: 'error',
                     show: true,
                 });
+                history.push('/');
             }
         }
-        useEffect(()=>{
-            if(isAuthenticated){
-                history.goBack();
-            }
-        },[isAuthenticated]);
 
         return <Component 
         {...(props as T)} 
