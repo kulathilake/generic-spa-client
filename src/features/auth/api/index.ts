@@ -24,8 +24,8 @@ export default class AuthApi implements IAuthApi{
     async signup(email: string, password: string, name: Name, role: Roles): Promise<AuthenticatedUser> {
         try {
             const authRes = await firebase.auth().createUserWithEmailAndPassword(email,password);
-            await firebase.firestore().collection('users').add({
-                username: authRes.user?.email,
+            await firebase.firestore().collection('users').doc(authRes.user?.uid!).set({
+                username: authRes.user?.uid,
                 account: {
                     firstName: name.firstName,
                     lastName: name.lastName,
@@ -33,7 +33,8 @@ export default class AuthApi implements IAuthApi{
                 }
             } as User);
             return {
-                username: authRes.user?.email!,
+                username: authRes.user?.uid!,
+                email: authRes.user?.email!,
                 account: {
                     firstName: name.firstName!,
                     lastName: name.lastName,
@@ -64,8 +65,11 @@ export default class AuthApi implements IAuthApi{
     async login(email: string, password: string): Promise<AuthenticatedUser> {
         try{
             const authRes = await firebase.auth().signInWithEmailAndPassword(email,password);
+            const userDataRes =  (await firebase.firestore().collection('users').doc(authRes.user?.uid).get()).data() as User;
             return {
-                username: authRes.user?.email!,
+                username: authRes.user?.uid!,
+                email: authRes.user?.email!,
+                account: userDataRes?.account,
                 tokens: {
                     accessToken: {
                         data: await authRes.user?.getIdToken()!
