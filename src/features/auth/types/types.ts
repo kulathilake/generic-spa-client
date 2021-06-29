@@ -5,6 +5,7 @@ export interface AuthWrapperProps{
     setAlert: () => void;
     onLogin: (email: string, password: string) => Promise<void>;
     onSignup: (name: string, email: string, password: string, role: Roles) => Promise<void>;
+    onLogout(): () => Promise<void>
   }
   
   export interface LoginViewProps extends AuthWrapperProps{
@@ -17,6 +18,10 @@ export interface AuthWrapperProps{
   }
   
   export interface SignupViewProps extends LoginViewProps{
+      
+  }
+
+  export interface LogoutViewProps extends AuthWrapperProps {
       
   }
 

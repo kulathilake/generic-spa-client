@@ -41,9 +41,9 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
                 });
             }
         };
-        const handleSignup = async (name: string, email: string, password: string, role: Roles) => {
+        const handleSignup = async (firstName: string, lastName:string, email: string, password: string, role: Roles) => {
             try{
-                let user = await api.signup(email, password, name, role);
+                let user = await api.signup(email, password, {firstName,lastName}, role);
                 if(user){
                     setIsAuthenticated(true);
                     setUser(user as AuthenticatedUser);
@@ -63,6 +63,22 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
                 });
             }
         }
+        const handleLogout = async () => {
+            try {
+                await api.logout();
+                setAlert({
+                    message: "You are logged out.",
+                    severity: 'success',
+                    show: true,
+                });
+            } catch (error) {
+                setAlert({
+                    message: error.message,
+                    severity: 'error',
+                    show: true,
+                });
+            }
+        }
         useEffect(()=>{
             if(isAuthenticated){
                 history.goBack();
@@ -73,6 +89,7 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
         {...(props as T)} 
         onLogin={handleLogin}
         onSignup={handleSignup}
+        onLogout={handleLogout}
         />
     }
 }

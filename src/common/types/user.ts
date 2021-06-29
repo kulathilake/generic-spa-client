@@ -8,9 +8,9 @@ export interface User {
 
 export type UserAccount = {
     role: Roles,
-    permissions: Permissions [],
+    permissions?: Permissions [],
     firstName: string;
-    lastName: string;
+    lastName?: string;
     mobile?: string;
     addresses?: Address[];
 }
