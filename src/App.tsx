@@ -22,7 +22,8 @@ function App() {
       if(user){
         setIsAuthenticated(true);
         setUser({
-          username: user.email!,
+          username: user.uid,
+          email: user.email!,
           tokens: {
             accessToken: {
               data: await user.getIdToken()

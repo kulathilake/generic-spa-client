@@ -3,6 +3,7 @@ import { Permissions, Roles } from "./auth";
 
 export interface User {
     username: string,
+    email: string,
     account?: UserAccount
 }
 
