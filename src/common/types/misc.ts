@@ -1,3 +1,9 @@
+export type Name = {
+    firstName?: string;
+    middleName?: string;
+    lastName?: string;
+    initials?: string[];
+}
 /**
  * Geolocation types.
  */

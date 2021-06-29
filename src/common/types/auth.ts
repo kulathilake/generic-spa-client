@@ -1,3 +1,4 @@
+import { Name } from "./misc";
 import { AuthProvider } from "./providers";
 import { AuthenticatedUser, User, UserAccount } from "./user";
 
@@ -7,7 +8,7 @@ export interface IAuthApi {
      * @param email string
      * @param password string
      */
-      signup(email:string, password: string, name: string, role: Roles): Promise<AuthenticatedUser>,
+      signup(email:string, password: string, name: Name, role: Roles): Promise<AuthenticatedUser>,
       /**
        * Performes Federated User Sign Up
        * @param provider AuthProvider

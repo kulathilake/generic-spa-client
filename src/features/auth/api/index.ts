@@ -1,6 +1,7 @@
 import { AuthenticatedUser, User, UserAccount } from "../../../common/types/user";
 import { IAuthApi, Roles } from "../../../common/types/auth";
 import {firebase} from '../../../App';
+import { Name } from "../../../common/types/misc";
 
 export default class AuthApi implements IAuthApi{
     private static instance: AuthApi | null;
@@ -20,11 +21,24 @@ export default class AuthApi implements IAuthApi{
      * @param email 
      * @param password 
      */
-    async signup(email: string, password: string, name: string, role: Roles): Promise<AuthenticatedUser> {
+    async signup(email: string, password: string, name: Name, role: Roles): Promise<AuthenticatedUser> {
         try {
             const authRes = await firebase.auth().createUserWithEmailAndPassword(email,password);
+            await firebase.firestore().collection('users').add({
+                username: authRes.user?.email,
+                account: {
+                    firstName: name.firstName,
+                    lastName: name.lastName,
+                    role: role,
+                }
+            } as User);
             return {
                 username: authRes.user?.email!,
+                account: {
+                    firstName: name.firstName!,
+                    lastName: name.lastName,
+                    role: role,
+                },
                 tokens: {
                     accessToken: {
                         data: await authRes.user?.getIdToken()!
