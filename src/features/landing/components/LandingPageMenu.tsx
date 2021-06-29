@@ -13,10 +13,15 @@ export default function LandingPageMenu(){
                 <li>Pricing</li>
             </ul>
             <div>
+                <ul>
                 {isAuthenticated?
-                "Account":
-                <a href="/login">Login/Register</a>
+                <>
+                <li>Account</li>
+                <li><a href="/logout">Logout</a></li>
+                </>:
+                <li><a href="/login">Login</a></li>
                 }
+            </ul>
             </div>
         </nav>
     )

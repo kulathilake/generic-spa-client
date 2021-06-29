@@ -1,4 +1,4 @@
-import { AuthenticatedUser, User } from "../../../common/types/user";
+import { AuthenticatedUser, User, UserAccount } from "../../../common/types/user";
 import { IAuthApi, Roles } from "../../../common/types/auth";
 import {firebase} from '../../../App';
 
@@ -12,7 +12,8 @@ export default class AuthApi implements IAuthApi{
         }
     };
     
-    private constructor() {};
+    private constructor() {}
+;
 
     /**
      * Let's a user sign up with email and password
@@ -22,11 +23,8 @@ export default class AuthApi implements IAuthApi{
     async signup(email: string, password: string, name: string, role: Roles): Promise<AuthenticatedUser> {
         try {
             const authRes = await firebase.auth().createUserWithEmailAndPassword(email,password);
-            // Save User Data
             return {
                 username: authRes.user?.email!,
-                role: role,
-                permissions: [],
                 tokens: {
                     accessToken: {
                         data: await authRes.user?.getIdToken()!
@@ -52,9 +50,8 @@ export default class AuthApi implements IAuthApi{
     async login(email: string, password: string): Promise<AuthenticatedUser> {
         try{
             const authRes = await firebase.auth().signInWithEmailAndPassword(email,password);
-            const user = await (this.getUserData());
             return {
-                ...user,
+                username: authRes.user?.email!,
                 tokens: {
                     accessToken: {
                         data: await authRes.user?.getIdToken()!
@@ -72,8 +69,12 @@ export default class AuthApi implements IAuthApi{
     federatedLogin(provider: any): Promise<User> {
         throw new Error("Method not implemented.");
     }
-    logout(): void {
-        throw new Error("Method not implemented.");
+    async logout(): Promise<void> {
+        try{
+            await firebase.auth().signOut();
+        }catch(e){
+            throw e;
+        }
     }
     reset(email: string): Promise<any> {
         throw new Error("Method not implemented.");
@@ -90,7 +91,17 @@ export default class AuthApi implements IAuthApi{
     changePassword(oldPassword: string, newPassword: string): Promise<any> {
         throw new Error("Method not implemented.");
     }
-    getUserData(): User {
+    /**
+     * Fetch User Account Information for the current Authenticated User.
+     */
+    getUserAccount(): Promise<UserAccount> {
+        throw new Error("Method not implemented.");
+    }
+    /**
+     * Sets User Account details for the current Authenticated User.
+     * @param data 
+     */
+    setUserAccount(data: UserAccount): Promise<UserAccount> {
         throw new Error("Method not implemented.");
     }
     
