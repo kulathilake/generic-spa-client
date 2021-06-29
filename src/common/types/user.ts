@@ -3,14 +3,16 @@ import { Permissions, Roles } from "./auth";
 
 export interface User {
     username: string,
+    account?: UserAccount
+}
+
+export type UserAccount = {
     role: Roles,
     permissions: Permissions [],
-    profile?: {
-        firstName?: string;
-        lastName?: string;
-        mobile?: string;
-        addresses?: Address[];
-    }
+    firstName: string;
+    lastName: string;
+    mobile?: string;
+    addresses?: Address[];
 }
 
 export interface AuthenticatedUser extends User {

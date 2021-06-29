@@ -1,5 +1,5 @@
 import { AuthProvider } from "./providers";
-import { AuthenticatedUser, User } from "./user";
+import { AuthenticatedUser, User, UserAccount } from "./user";
 
 export interface IAuthApi {
      /**
@@ -20,13 +20,16 @@ export interface IAuthApi {
        */
       login(email: string, password: string): Promise<AuthenticatedUser>,
       federatedLogin(provider: AuthProvider): Promise<User>
-      logout():void,
+      logout():Promise<void>,
       reset(email: string): Promise<any>,
       resetConfirm(email: string, code: string): Promise<any>,
       confirmEmail(code:string,email:string): Promise<any>,
       refresh(token: string): Promise<any>,
       changePassword(oldPassword: string, newPassword: string): Promise<any>
-      getUserData(): User,
+      
+      getUserAccount(): Promise<UserAccount>,
+      setUserAccount(data:UserAccount): Promise<UserAccount>
+
 };
 
 export type AuthContextType = {
