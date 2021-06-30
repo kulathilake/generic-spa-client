@@ -7,6 +7,7 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType); //TOD
 const {Consumer: AuthConsumer, Provider} = AuthContext;
 
 function AuthProvider(props: any) {
+    const [isAuthLoading, setIsAuthLoading] = useState<boolean>(true);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [user, setUser] = useState<AuthenticatedUser|null>(null);
     
@@ -25,7 +26,7 @@ function AuthProvider(props: any) {
 
 
     return (
-        <Provider value={{isAuthenticated,setIsAuthenticated, user, setUser}}>
+        <Provider value={{isAuthenticated,setIsAuthenticated, user, setUser, isAuthLoading, setIsAuthLoading}}>
             {props.children}
         </Provider>
     )

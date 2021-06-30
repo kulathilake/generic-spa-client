@@ -1,22 +1,19 @@
-import { useAuth } from "../../../app/hooks"
+import { useAuth } from "../../../app/hooks";
 
-export default function LandingPageMenu(){
-    const {isAuthenticated} = useAuth();
+export default function DashboardTopMenu(){
+    const { isAuthenticated } = useAuth();
     return (
         <nav>
             <div>
                 <img src="" alt="outreach logo"/>
             </div>
             <ul>
-                <li>Home</li>
-                <li>Features</li>
-                <li>Pricing</li>
             </ul>
             <div>
                 <ul>
                 {isAuthenticated?
                 <>
-                <li><a href="/dashboard">Account</a></li>
+                <li>Account</li>
                 <li><a href="/logout">Logout</a></li>
                 </>:
                 <li><a href="/login">Login</a></li>

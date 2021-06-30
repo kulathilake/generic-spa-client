@@ -30,7 +30,7 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
                         severity: 'success',
                         show: true,
                     });
-                    history.push('/');
+                    history.push('/dashboard');
                 };
             }catch(error){
                 setAlert({
@@ -52,7 +52,7 @@ export default function withAuthContext <T extends AuthWrapperProps>(Component: 
                         severity: 'success',
                         show: true,
                     });
-                    history.push('/');
+                    history.push('/dashboard');
                 };
             }catch(error){
                 setAlert({

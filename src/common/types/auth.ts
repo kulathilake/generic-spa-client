@@ -35,6 +35,8 @@ export interface IAuthApi {
 
 export type AuthContextType = {
   isAuthenticated: boolean;
+  isAuthLoading: boolean;
+  setIsAuthLoading: (value:boolean) => void;
   setIsAuthenticated: (value:boolean) => void;
   user: AuthenticatedUser | null;
   setUser: (user:AuthenticatedUser | null) => void;

@@ -2,6 +2,7 @@ import { Route } from "../common/types/routes";
 import LoginView from "../features/auth/LoginView";
 import LogoutView from "../features/auth/LogoutView";
 import SignupView from "../features/auth/SIgnupView";
+import DashboardView from "../features/dashboard/DashboardView";
 import LandingPage from "../features/landing";
 
 /**
@@ -29,7 +30,13 @@ export const routes: Route[] = [
     {
         component: LogoutView,
         exact: true,
-        isProtected: true,
+        isProtected: false,
         path: '/logout'
+    },
+    {
+        component: DashboardView,
+        exact: true,
+        isProtected: true,
+        path: '/dashboard'
     }
 ];

@@ -9,7 +9,7 @@ import { useAuth } from "./app/hooks";
 const app = firebase();
 
 function App() {
-  const {setIsAuthenticated, setUser} = useAuth();
+  const {setIsAuthenticated, setUser, setIsAuthLoading} = useAuth();
   
   /**
    * This Effect Hook will wait for the Firebase onAuthStateChanged Listener
@@ -21,6 +21,7 @@ function App() {
     app.auth().onAuthStateChanged(async (user)=>{
       if(user){
         setIsAuthenticated(true);
+        setIsAuthLoading(false);
         setUser({
           username: user.uid,
           email: user.email!,
@@ -37,6 +38,8 @@ function App() {
         // The Action's reducer will set the Role and Permissions of the 
         // Current Authenticated User
         // TODO: Call Dispatch on FetchUserAccount Action.
+      }else{
+        setIsAuthLoading(false);
       }
     })
   },[]);
