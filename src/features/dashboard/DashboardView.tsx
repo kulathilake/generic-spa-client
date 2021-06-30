@@ -3,6 +3,7 @@ import DashboardTopMenu from "./components/DashboardTopMenu";
 import DashboardDrawer from "./components/DashboardDrawer";
 import withInjectedProps from "./components/withInjectedProps";
 import ColumnedPage, {Column, Row} from "../../common/layouts/pages/ColumnedPage";
+import DashboardDraweItems from './dashboard-items';
 
 export function DashboardView(){
     return (
@@ -12,7 +13,7 @@ export function DashboardView(){
             </Row>
             <Row>
                 <Column>
-                    <DashboardDrawer items={[]} />
+                    <DashboardDrawer items={DashboardDraweItems} />
                 </Column>
                 <Column>
                     {/* Dashboard Content Here */}
