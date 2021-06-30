@@ -27,9 +27,6 @@ export default function withRouteProtection(redirect: string | ReactNode): React
             };
         };
 
-        useEffect(()=>{
-            console.log(user,isAuthenticated);
-        },[isAuthenticated,user])
     
         if(isAuthLoading){
             return <p>Authenticating</p>
@@ -37,7 +34,7 @@ export default function withRouteProtection(redirect: string | ReactNode): React
         return (
         <Route {...(props as RouteProps)}>
             {/* {props.children} */}
-            {isAuthenticated?props.children:renderFallback()}
+            {isAuthorized()?props.children:renderFallback()}
         </Route>)
     }
 }
