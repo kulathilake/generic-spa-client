@@ -35,7 +35,7 @@ export const routes: Route[] = [
     },
     {
         component: DashboardView,
-        exact: true,
+        exact: false,
         isProtected: true,
         path: '/dashboard'
     }

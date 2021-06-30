@@ -10,11 +10,11 @@ const items: DashboardDrawerItemProps[] = [
     {
         icon: "/assets/icons/dashboard/links.png",
         label: "Links",
-        path:"/links"
+        path:"/dashboard/links"
     },{
         icon: "/assets/icons/dashboard/channels.png",
         label: "Channels",
-        path: "/channels",
+        path: "/dashboard/channels",
         requiredRole: Roles.CREATOR
     }
 ];

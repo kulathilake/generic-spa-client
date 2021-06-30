@@ -4,7 +4,9 @@ import DashboardDrawer from "./components/DashboardDrawer";
 import withInjectedProps from "./components/withInjectedProps";
 import ColumnedPage, {Column, Row} from "../../common/layouts/pages/ColumnedPage";
 import DashboardDraweItems from './dashboard-items';
-
+import { DashboardFeatureView } from "./components/DashboardFeatureView";
+import Routes from "../../common/components/routes/NestedRoutes";
+import dashboardRoutes from './dashboard-routes';
 export function DashboardView(){
     return (
         <ColumnedPage>
@@ -17,6 +19,10 @@ export function DashboardView(){
                 </Column>
                 <Column>
                     {/* Dashboard Content Here */}
+                    <DashboardFeatureView>
+                        {/* Nested Routes */}
+                        <Routes redirect="login" routes={dashboardRoutes}/>
+                    </DashboardFeatureView>
                 </Column>
             </Row>
         </ColumnedPage>

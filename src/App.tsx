@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { routes } from "./app/routes";
-import MainRoutes from "./common/components/routes/MainRoutes";
+import MainRoutes from "./common/components/routes/Routes";
 import firebase from './app/firebase';
 import { useEffect } from "react";
 import { useAuth } from "./app/hooks";

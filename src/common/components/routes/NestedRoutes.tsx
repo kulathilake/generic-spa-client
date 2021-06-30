@@ -1,11 +1,10 @@
-import { BrowserRouter, Switch, Route, } from "react-router-dom";
+import { Switch, Route, } from "react-router-dom";
 import { RouterProps } from "../../types/routes";
 import withRouteProtection from "./withRouteProtection";
 
-export default function MainRoutes(props:RouterProps){
+export default function NestedRoutes(props:RouterProps){
     const ProtectedRoute = withRouteProtection(props.redirect);
     return (
-        <BrowserRouter>
             <Switch>
             {props.routes.map((route,i)=>{
                 return route.isProtected? 
@@ -18,6 +17,5 @@ export default function MainRoutes(props:RouterProps){
             })
             }
             </Switch>
-        </BrowserRouter>
     )
 }
