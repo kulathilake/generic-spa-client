@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState, } from "react";
+import { ReactNode } from "react";
 import { Route,Redirect, RouteProps,} from "react-router-dom";
 import { useAuth } from "../../../app/hooks"
 import {Route as RouteType} from '../../types/routes';
@@ -6,7 +6,7 @@ import {Route as RouteType} from '../../types/routes';
 export default function withRouteProtection(redirect: string | ReactNode): React.FC<RouteProps & RouteType>{
     return function(props) {
 
-        const {isAuthenticated,user,isAuthLoading} = useAuth();
+        const {isAuthenticated,isAuthLoading} = useAuth();
         /**
          * Checks if the user is authorized (isAuthenticated being true is a given)
          * as per the permission requirement and user permissions, to view the route.
